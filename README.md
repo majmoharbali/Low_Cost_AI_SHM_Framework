@@ -122,7 +122,7 @@ This framework addresses specific challenges in Sudan's infrastructure landscape
 **Position**: Research Assistant, Alzaiem Alazhari University, Khartoum, Sudan  
 **Education**: M.Sc. Civil Engineering, University of Bologna, Italy  
 **Email**: <majzoob.arbab@studio.unibo.it>  
-**Research Website**: <https://majzoob-phd-research.netlify.app/>
+**Research Website**: <https://www.majzoobali.com>
 
 ---
 
