@@ -1,0 +1,123 @@
+{
+  "status": "passed",
+  "scope": "Numerical verification only; no measured-data, safety, damage-detection or hardware validation",
+  "source_revision": "d6087b596a15b60c6e25ab0a9fe41e632b84b248",
+  "working_tree_modified": true,
+  "source_sha256": {
+    "src/__init__.py": "05d774b536c497384b61b2e3814093cd2b7678a162a9070547eea24fede0aa6c",
+    "src/core/__init__.py": "7de51d3ad7247cf2c7342bc47faa865a62a10b087c5d88bec97b989a8f1ec42d",
+    "src/core/beam.py": "0a08f0c5c8d4dc58be88e3d1b56c33edfdee4e4904376582eb934ba7b57e85ff",
+    "src/features.py": "b818f2b4b35e8c0b61820f67b5814493b2635e03d34b5e9fe9e6fdf9444303c0",
+    "src/identification.py": "84138f2692b0bab7b4321770fea1da942927b991c910a81000f35d8d870eac7f",
+    "src/main_simulation.py": "2400cd792ab4bcff43e09d0a2278f96611dc97cede96d5f663852a8d7e749d9c",
+    "src/records.py": "f7a4cf5d3c1eecad6f386b9502f9617a7b9f6e26bb20714402a46f803881a585",
+    "src/train_model.py": "0b688bd2724861d68702ab9cc0e3045a9976d21288b64dfb0c1ea07bd05fd07d",
+    "src/utils/__init__.py": "f01b94515451de90dd80bf50a6f56aa4cd1e64992696655752910442b82064d4",
+    "src/verify_mechanics.py": "d9ae0e31e9a42586889a6ab370a17c6f1ab00fef25f93855c61c5f11532730c4"
+  },
+  "config": {
+    "length_m": 20.0,
+    "width_m": 0.3,
+    "height_m": 0.5,
+    "young_pa": 30000000000.0,
+    "density_kg_m3": 2500.0,
+    "elements": 20,
+    "modes": 3,
+    "damping_ratio": 0.02
+  },
+  "checks": {
+    "analytical_frequencies_below_0_1_percent": true,
+    "uniform_stiffness_scaling": true,
+    "zoh_time_refinement": true,
+    "controlled_fdd_within_one_bin": true,
+    "nodal_mode_unavailable": true,
+    "detector_unfitted": true
+  },
+  "frequencies_hz": [
+    1.9634962380744172,
+    7.854034612989432,
+    17.672060027346586
+  ],
+  "analytical_hz": [
+    1.9634954084936207,
+    7.853981633974483,
+    17.671458676442587
+  ],
+  "relative_frequency_errors": [
+    4.225020302506266e-07,
+    6.74549768753252e-06,
+    3.402950005493288e-05
+  ],
+  "uniform_stiffness_ratio_max_error": 2.0661983235470416e-10,
+  "time_refinement_max_error_m_s2": 3.885780586188048e-16,
+  "fdd": {
+    "excitation": "periodic nodal pulses, 10000 N for 0.01 s every 20.48 s; initial 81.92 s discarded",
+    "search_bands_hz": [
+      [
+        1.7671466142669756,
+        2.159845861881859
+      ],
+      [
+        7.068631151690489,
+        8.639438074288377
+      ],
+      [
+        15.904854024611927,
+        19.439266030081246
+      ]
+    ],
+    "nperseg": 4096,
+    "window": "hann",
+    "overlap": 0.5,
+    "resolution_hz": 0.0244140625,
+    "controlled_modes": [
+      {
+        "status": "identified",
+        "frequency_hz": 1.953125,
+        "absolute_error_hz": 0.0103712380744172,
+        "mac_to_known_shape": 0.9999866262261395,
+        "reason": "FDD peak within supplied band; not proof of a structural mode"
+      },
+      {
+        "status": "identified",
+        "frequency_hz": 7.861328125,
+        "absolute_error_hz": 0.007293512010567937,
+        "mac_to_known_shape": 0.9975233355060424,
+        "reason": "FDD peak within supplied band; not proof of a structural mode"
+      },
+      {
+        "status": "identified",
+        "frequency_hz": 17.67578125,
+        "absolute_error_hz": 0.0037212226534144577,
+        "mac_to_known_shape": 0.9871453037537373,
+        "reason": "FDD peak within supplied band; not proof of a structural mode"
+      }
+    ],
+    "midspan_second_mode": "unavailable",
+    "random_record_modes": [
+      {
+        "status": "identified",
+        "frequency_hz": 1.953125,
+        "reason": "FDD peak within supplied band; not proof of a structural mode"
+      },
+      {
+        "status": "ambiguous",
+        "frequency_hz": null,
+        "reason": "Competing peaks require narrower bands or a different identification method"
+      },
+      {
+        "status": "ambiguous",
+        "frequency_hz": null,
+        "reason": "Competing peaks require narrower bands or a different identification method"
+      }
+    ],
+    "limitation": "Model-informed bands; plain FDD assumes suitable excitation and isolated modal peaks. No damping estimate."
+  },
+  "detector": {
+    "status": "not_fitted",
+    "coverage": 1.0,
+    "reason": "No research detector has been fitted",
+    "score": null,
+    "threshold": null
+  }
+}

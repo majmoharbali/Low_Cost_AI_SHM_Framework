@@ -31,10 +31,10 @@ from sklearn.calibration import CalibratedClassifierCV
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from .physics_engine import ModalDamageSimulator
 from ..features import FeatureExtractor
+from .access import MODEL
 
 # --- CONFIGURATION ---
-ARTIFACTS_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'artifacts')
-MODEL_PATH = os.path.join(ARTIFACTS_DIR, 'shm_deployment_package_enhanced.pkl')
+MODEL_PATH = str(MODEL)
 
 class DataGeneratorWrapper:
     """Wrapper to generate large datasets using the ModalDamageSimulator."""

@@ -10,9 +10,9 @@ Use Python 3.13 and a project-local virtual environment:
 
 ```powershell
 python -m venv .venv
-.venv/Scripts/python.exe -m pip install -r requirements-dev.txt
-.venv/Scripts/python.exe -m pytest -q
-.venv/Scripts/python.exe -m src.verify_mechanics --output outputs/verification.json
+.venv/Scripts/python.exe -X utf8 -m pip install -c review/environment-freeze.txt -r requirements-dev.txt
+.venv/Scripts/python.exe -X utf8 -m pytest -q
+.venv/Scripts/python.exe -X utf8 -m src.verify_mechanics --output outputs/verification.json
 ```
 
 On Linux use `.venv/bin/python`. CI runs numerical and smoke checks on Windows and Linux. Dependency versions are pinned; the tested resolved environment is recorded in `review/environment-freeze.txt`.
@@ -30,10 +30,10 @@ The original artifact is preserved with its checksum and source revision in `rev
 The public launchers require explicit opt-in:
 
 ```powershell
-.venv/Scripts/python.exe -m pip install -r requirements-legacy.txt
-.venv/Scripts/python.exe -m src.main_simulation --legacy --smoke
-.venv/Scripts/python.exe -m src.main_simulation --legacy --windows 6
-.venv/Scripts/python.exe -m src.train_model --legacy --smoke
+.venv/Scripts/python.exe -X utf8 -m pip install -c review/environment-freeze.txt -r requirements-legacy.txt
+.venv/Scripts/python.exe -X utf8 -m src.main_simulation --legacy --smoke
+.venv/Scripts/python.exe -X utf8 -m src.main_simulation --legacy --windows 6
+.venv/Scripts/python.exe -X utf8 -m src.train_model --legacy --smoke
 ```
 
 Open `dashboard/index.html` for the finite legacy stream. Only sensor 0 is classified, matching the original training location. Other channels are displayed without classification. The interface issues no global structural-health assessment. Retraining writes to `outputs/legacy/`, never over the original artifact. The reproduction retains the old in-sample evaluation limitations; synthetic classes are not engineering severity definitions.

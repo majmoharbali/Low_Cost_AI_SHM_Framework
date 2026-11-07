@@ -72,7 +72,7 @@ def run(seed=42, windows=6, port=8765, smoke=False):
             finally:
                 clients.discard(socket)
 
-        async with websockets.serve(handler, 'localhost', port):
+        async with websockets.serve(handler, '127.0.0.1', port):
             print(f'ws://localhost:{port}; {windows} windows, then automatic shutdown')
             await asyncio.sleep(1)
             for frame in frames(seed, windows):

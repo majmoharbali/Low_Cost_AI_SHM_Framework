@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Low-Cost AI-Driven SHM Dashboard | Infrastructure Resilience for Developing Nations</title>
+    <title>Legacy synthetic SHM demonstration</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -555,7 +555,7 @@
                     },
                     tooltip: {
                         mode: 'index', intersect: false,
-                        callbacks: { label: (ctx) => ` ${ctx.raw.toFixed(4)} g` }
+                        callbacks: { label: (ctx) => ` ${ctx.raw.toFixed(4)} arbitrary units` }
                     }
                 },
                 scales: {
@@ -569,7 +569,7 @@
                         display: true, min: -1.5, max: 1.5,
                         grid: { color: '#334155' },
                         ticks: { color: '#94a3b8' },
-                        title: { display: true, text: 'Amplitude (g)', color: '#94a3b8', font: { size: 10 } }
+                        title: { display: true, text: 'Legacy amplitude (arbitrary units)', color: '#94a3b8', font: { size: 10 } }
                     }
                 }
             }

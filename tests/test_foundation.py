@@ -29,6 +29,16 @@ def test_preserved_original_model():
             assert hashlib.sha256((root / path).read_bytes()).hexdigest() == expected
 
 
+def test_retraining_cannot_overwrite_original_artifact():
+    pytest.importorskip('sklearn')
+    from src.legacy.training import main
+    from src.legacy.access import MODEL
+    before = hashlib.sha256(MODEL.read_bytes()).hexdigest()
+    with pytest.raises(ValueError, match='must not be overwritten'):
+        main(samples=30, output=MODEL)
+    assert hashlib.sha256(MODEL.read_bytes()).hexdigest() == before
+
+
 @pytest.mark.parametrize('source', ['beam_verification', 'z24', 'kw51', 'measured', ''])
 def test_legacy_boundary_rejects_new_sources_before_loading_or_prediction(source):
     with pytest.raises(ValueError, match='Legacy classifier'):
