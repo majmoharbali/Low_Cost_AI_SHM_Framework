@@ -1,129 +1,54 @@
-# Democratizing Infrastructure Resilience: A Low-Cost AI-Driven Structural Health Monitoring Framework
+# Low-cost SHM: research baseline and legacy demonstration
 
-## Sustainable Monitoring with AI-Driven Analytics, Commercial Sensors, and Local Capacity Building for Developing Nations with Focus on Sudan
+This repository is being rebuilt around one question: **how well can environmental effects be separated from structural changes in measured vibration data, and how does performance deteriorate with fewer sensors or poorer measurements?**
 
-## 📋 Overview
+Milestone 1 provides a numerical verification foundation. It does not establish measured-data damage detection, structural safety, low-cost hardware performance, battery life or deployment suitability in Sudan. The earlier classifier and dashboard remain a labelled legacy synthetic demonstration.
 
-This repository implements a practical, low-cost risk assessment prototype designed for resource-constrained infrastructure in developing nations. It demonstrates how affordable commercial sensors combined with AI-driven analytics can enable effective Structural Health Monitoring (SHM) in regions with limited engineering resources.
+## Installation
 
-The system bridges the gap between physics-based structural dynamics (Modal Analysis) and data-driven decision making (Machine Learning), specifically tailored for deployment in Sudan and similar developing nations where traditional high-cost SHM solutions are economically unfeasible.
+Use Python 3.13 and a project-local virtual environment:
 
-## 🏛️ Key Research Features
-
-1. **Low-Cost Sensor Integration**: Demonstrates effective SHM using affordable commercial sensors (accelerometers, strain gauges) rather than expensive proprietary systems, making infrastructure monitoring accessible to developing nations.
-
-2. **Physics-Based Data Generation**: Simulates structural damage as shifts in modal parameters (frequencies/damping) and mode shapes, enabling realistic training data without requiring expensive physical testing infrastructure.
-
-3. **Bayesian Risk Assessment**: Implements a Bayesian Sensor Fusion engine that aggregates probabilistic evidence, accounting for sensor reliability - crucial for low-cost sensor networks with varying quality.
-
-4. **Cost-Sensitive Optimization**: Decision thresholds optimized using ROC analysis to minimize expected financial cost, accounting for the economic constraints faced by developing nations.
-
-5. **Edge-Aware Simulation**: Models real-world constraints including battery degradation (solar cycles) and unreliable network connectivity - critical factors in Sudan and similar regions with limited infrastructure.
-
-6. **Explainable AI (XAI)**: Custom engine translates ML predictions into physically grounded narratives, enabling local engineers to understand and trust the system without advanced ML expertise.
-
-7. **Local Capacity Building**: Designed with knowledge transfer in mind, using open-source tools and transparent methodologies that can be maintained by local engineering teams.
-
-## 🏗️ System Architecture
-
-The system operates as a closed-loop simulation:
-
-1. **Modal Simulator**: Generates spatially-correlated vibration data based on stiffness reduction.
-2. **Edge Processor**: Extracts physics-domain features (Welch PSD, Kurtosis) and runs a Calibrated Random Forest.
-3. **Fusion Engine**: Aggregates sensor probabilities to update the global health state (Posterior).
-4. **Digital Twin Dashboard**: Visualizes the bridge state, uncertainty (Entropy), and "Action Recommendations."
-
-## 📂 Directory Structure
-
-```text
-Low_Cost_AI_SHM_Prototype/
-│
-├── artifacts/                   # Model storage (generated during training)
-├── dashboard/
-│   └── index.html              # Real-time visualization interface
-├── src/
-│   ├── main_simulation.py      # Digital Twin orchestrator
-│   ├── train_model.py          # Model training pipeline
-│   │
-│   ├── core/                   # Research modules
-│   │   ├── physics_engine.py   # Modal damage simulation
-│   │   ├── sensor_fusion.py    # Bayesian inference
-│   │   └── xai_engine.py       # Explainable AI
-│   │
-│   └── utils/                  # Infrastructure
-│       ├── power_manager.py    # Battery/solar simulation
-│       └── network_manager.py  # Packet loss modeling
-│
-├── requirements.txt
-└── README.md
+```powershell
+python -m venv .venv
+.venv/Scripts/python.exe -m pip install -r requirements-dev.txt
+.venv/Scripts/python.exe -m pytest -q
+.venv/Scripts/python.exe -m src.verify_mechanics --output outputs/verification.json
 ```
 
-## 🚀 Getting Started
+On Linux use `.venv/bin/python`. CI runs numerical and smoke checks on Windows and Linux. Dependency versions are pinned; the tested resolved environment is recorded in `review/environment-freeze.txt`.
 
-### 1. Prerequisites
+## Numerical research path
 
-```bash
-pip install -r requirements.txt
+The reference is a simply supported Euler–Bernoulli beam: 20 m span, 0.30 by 0.50 m section, E = 30 GPa, density 2,500 kg/m³, and 20 consistent-mass finite elements. Its three retained mass-normalised modes have 2% damping. Inputs are nodal forces in newtons held constant between samples; outputs are acceleration in m/s². Independent sensor noise is added after the response. There is no per-window amplitude normalisation.
+
+The reduced model verifies numerical methods. It is not a calibrated model of Z24, KW51 or a field asset. It omits shear deformation, rotary inertia and response from truncated higher modes. Plain FDD estimates frequencies and relative mode shapes, not damping. Missing or ambiguous modes are unavailable. No research detector has been fitted: scores and thresholds remain absent.
+
+## Legacy demonstration
+
+The original artifact is preserved with its checksum and source revision in `review/legacy_manifest.json`. Original runtime, fusion, explanation and resource models are retained under `src/legacy/` for historical inspection. Moving them does not repair their scientific limitations.
+
+The public launchers require explicit opt-in:
+
+```powershell
+.venv/Scripts/python.exe -m pip install -r requirements-legacy.txt
+.venv/Scripts/python.exe -m src.main_simulation --legacy --smoke
+.venv/Scripts/python.exe -m src.main_simulation --legacy --windows 6
+.venv/Scripts/python.exe -m src.train_model --legacy --smoke
 ```
 
-### 2. Train the Probabilistic Model
+Open `dashboard/index.html` for the finite legacy stream. Only sensor 0 is classified, matching the original training location. Other channels are displayed without classification. The interface issues no global structural-health assessment. Retraining writes to `outputs/legacy/`, never over the original artifact. The reproduction retains the old in-sample evaluation limitations; synthetic classes are not engineering severity definitions.
 
-Generates the calibrated model and statistically derived thresholds.
+The research modules never load the saved classifier. Its legacy loader verifies the original checksum and rejects non-legacy source identifiers before loading or prediction.
 
-```bash
-python -m src.train_model
-```
+## Measured-data milestones
 
-**Output**: `artifacts/shm_deployment_package_enhanced.pkl`
+1. Obtain and audit official Z24 recordings, or use the small KW51 tracked-modal-results archive if Z24 access remains pending.
+2. Freeze chronology, exclusions and time-group partitions before comparing constant, linear-temperature and spline-temperature reference models.
+3. Calibrate thresholds on separate reference records; evaluate held-out reference alarms, intervention responses, availability and abstentions.
+4. Study sensor reduction only with synchronous raw recordings. Processed modal results cannot establish reduced-sensor performance.
 
-### 3. Run the Digital Twin Simulation
+Z24 requires [official registration](https://bwk.kuleuven.be/bwm/z24/registration); its recordings must not be redistributed. [KW51](https://bwk.kuleuven.be/bwm/kw51) has an [official archive](https://zenodo.org/records/3745914). Its reference condition may contain existing defects; retrofit-associated change is not a known damage-onset label. Neither dataset has been analysed by this milestone.
 
-Starts the physics engine, edge processors, and WebSocket server.
+Local recordings, generated outputs and `graphify-out/` are ignored. The graph supplements source inspection and reports extraction-integrity warnings. The detailed protocol and milestone evidence are in `review/`.
 
-```bash
-python -m src.main_simulation
-```
-
-### 4. View the Interface
-
-Open `dashboard/index.html` in any modern web browser.
-
-## 🧪 Technical Highlights
-
-- **Modal Superposition**: Implements MDOF (Multi-Degree-of-Freedom) system dynamics
-- **Bayesian Fusion**: Uses log-space computation to prevent numerical underflow
-- **SHAP Integration**: TreeExplainer provides feature attributions for each prediction
-- **Calibrated Probabilities**: Isotonic regression ensures reliability diagrams align with true frequencies
-
-## 📚 Research Alignment & Impact
-
-This work directly addresses critical challenges in infrastructure resilience for developing nations:
-
-- **Democratizing SHM Technology**: Making structural monitoring accessible to regions with limited budgets through low-cost commercial sensors and open-source AI tools
-- **Sustainable Infrastructure Development**: Enabling proactive maintenance in Sudan and similar nations where reactive maintenance dominates due to resource constraints
-- **Technology Transfer & Local Capacity**: Designed for knowledge transfer, empowering local engineers with transparent, explainable AI systems
-- **Climate Resilience**: Supporting infrastructure adaptation in regions vulnerable to climate change impacts
-- **Economic Development**: Reducing infrastructure failure costs that disproportionately affect developing economies
-
-## 🌍 Target Application: Sudan Context
-
-This framework addresses specific challenges in Sudan's infrastructure landscape:
-
-- **Limited Resources**: Cost-effective solutions using commercial off-the-shelf (COTS) sensors
-- **Power Constraints**: Solar-powered edge computing with battery optimization
-- **Network Reliability**: Resilient operation under intermittent connectivity
-- **Skills Gap**: Explainable AI for interpretability by local engineering teams
-- **Climate Stress**: Monitoring infrastructure subjected to extreme temperature variations and flooding
-
-## 📧 Contact
-
-**PhD Proposal**: Democratizing Infrastructure Resilience for Developing Nations  
-**Author**: Majzoob Ali  
-**Position**: Research Assistant, Alzaiem Alazhari University, Khartoum, Sudan  
-**Education**: M.Sc. Civil Engineering, University of Bologna, Italy  
-**Email**: <majzoob.arbab@studio.unibo.it>  
-**Research Website**: <https://www.majzoobali.com>
-
----
-
-*This prototype serves as a proof-of-concept for sustainable, AI-driven structural health monitoring systems specifically designed for resource-constrained environments in developing nations, with initial focus on Sudan's critical infrastructure needs.*
+Author: Majzoob Ali. Low-cost sensing remains a later experiment requiring reference-instrument comparison and measured operation profiles.
