@@ -44,4 +44,6 @@ With synchronous raw recordings and verified identification, compare engineering
 
 The [KW51 raw-signal pilot](milestone4_report.md) compares 17 scenarios on prespecified deck recordings. Its measured coverage and relative timing results guide a subsequent hardware comparison, while the sparse archive replay limits generalisation.
 
-Physical low-cost sensing, mounting and synchronisation need reference-instrument comparisons. Battery/network claims need measured operation profiles and accounting for loss before the component being tested. Defer FE updating, PINNs, deep models, SHAP, automatic damage localisation and financial-risk optimisation until a measured baseline exposes a specific need. Sudan-specific deployment suitability remains untested.
+The [first physical bench protocol](hardware_bench_protocol.md) specifies a co-mounted, single-axis accelerometer comparison and a shared hardware time reference. The comparison is verified on synthetic paired files. Physical gain, phase, quiet-record RMS and remount repeatability await recorded bench data. Battery and network performance require measured operation profiles and instrumented sender and receiver records.
+
+Defer FE updating, PINNs, deep models, SHAP, automatic damage localisation and financial-risk optimisation until a measured baseline exposes a specific need. Sudan-specific deployment suitability remains untested.
