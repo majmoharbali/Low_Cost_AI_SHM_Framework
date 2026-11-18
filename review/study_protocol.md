@@ -36,6 +36,8 @@ Fix the empirical 99th-percentile calibration threshold and two-consecutive-vali
 
 Report reference alarm fractions and episodes per monitored time, intervention-specific outcomes, identification availability, abstentions and environmental support. Report delay only when documented onset supports it. Account for missing/abstained records in denominators. Resample sessions or justified time blocks for uncertainty; windows and folds are not independent damage events or independent bridges. A retrospective seasonal-coverage analysis, if added, must be separate from prospective results. Do not require a complex model to outperform a simple baseline as a condition for honest reporting.
 
+The [KW51 replay protocol](milestone3_protocol.md) fixes the chronological cut points, eligibility, calibration and paired comparison before fitting. The [Milestone 3 report](milestone3_report.md) records the frozen evaluation and the interpretation limits.
+
 ## Milestone 4 and later extensions
 
 With synchronous raw recordings and verified identification, compare engineering-selected and seeded random subsets. Select using development data and rerun identification for each subset. Processed KW51 modal series alone cannot test physical channel reduction. Inject controlled noise, bias, timing errors and burst loss into signal copies before identification. Record that original sensor noise remains present. Report unobservable modes, changes in detection and abstentions rather than promising a minimum channel count.
