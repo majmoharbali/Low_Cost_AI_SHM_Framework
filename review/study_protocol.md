@@ -24,6 +24,8 @@ Record archive checksums, origin, dataset version, timestamps/time convention, s
 
 Freeze a documented chronology and reference/intervention/exclusion table before modelling. For KW51, pre-retrofit is a reference condition that may contain defects; retrofit-associated changes are not independently labelled damage onset. If metadata cannot establish an eligible reference period or usable environmental data, stop model fitting and report the missing evidence.
 
+The [completed KW51 data audit](milestone2_kw51.md) identifies eligible periods and temperature coverage. For this dataset, prospective replay refers to chronological scoring of provider-tracked hourly modal features. The change of sensor setup and campaign-wide mode tracking limit interpretation. Retain scheduled missing hours in coverage and persistence accounting.
+
 ## Milestone 3: environment-conditioned reference detector
 
 Compare an unconditioned frequency reference, linear temperature compensation and a regularised spline temperature model. Select usable modes and environmental inputs using reference development records only. Use residual scores; do not label scores or tail areas as damage probabilities.

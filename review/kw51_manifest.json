@@ -1,0 +1,36 @@
+{
+  "dataset": "Monitoring data for railway bridge KW51 in Leuven, Belgium, before, during, and after retrofitting",
+  "creators": ["Kristof Maes", "Geert Lombaert"],
+  "version": "1.0",
+  "doi": "10.5281/zenodo.3745914",
+  "record": "https://zenodo.org/records/3745914",
+  "provider": "https://bwk.kuleuven.be/bwm/kw51",
+  "data_paper": "https://doi.org/10.1061/(ASCE)BE.1943-5592.0001668",
+  "licence": "CC BY-NC-SA 4.0 (KU Leuven benchmark terms)",
+  "retrieval_date": "2026-11-18",
+  "files": [
+    {
+      "name": "trackedmodes.zip",
+      "url": "https://zenodo.org/api/records/3745914/files/trackedmodes.zip/content",
+      "bytes": 12916665,
+      "published_md5": "5cdb446519d1150228fab51b3a002239",
+      "sha256": "a379b5ed9836f0250ba126fed7bb2742a1e4e2ea28e11073f43c140f157912b0",
+      "member": "trackedmodes/trackedmodes.mat",
+      "member_sha256": "d6a707d374297c3ccf754dea56450a14846126556209ff0d712b0855d1315c9b"
+    },
+    {
+      "name": "readme.txt",
+      "url": "https://zenodo.org/records/3745914/files/readme.txt?download=1",
+      "bytes": 546,
+      "published_md5": "173d69dc896fa7894d78a4025ffdcdb5",
+      "sha256": "6e90a2523131861e8352bed0ae937143d3b9a0eb951012bf3f47ae94d8d3fe59"
+    },
+    {
+      "name": "matlab-functions.zip",
+      "url": "https://zenodo.org/records/3745914/files/matlab-functions.zip?download=1",
+      "bytes": 6915,
+      "published_md5": "517817fd0c6196e69eb9c3ebadebc155",
+      "sha256": "76bc26d5880278ac7b22e91f21ef135f1ef69918c4adae483a7240823db23aa5"
+    }
+  ]
+}
