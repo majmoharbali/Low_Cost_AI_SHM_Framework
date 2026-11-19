@@ -1,6 +1,10 @@
 # Low-cost SHM: research baseline and legacy demonstration
 
-This repository is being rebuilt around one question: **how well can environmental effects be separated from structural changes in measured vibration data, and how does performance deteriorate with fewer sensors or poorer measurements?**
+This project studies how environmental effects can be separated from structural changes in measured vibration data and how reducing or degrading the measurements affects the result.
+
+- [KW51 results and reproduction](review/milestone3_report.md) covers the held-out comparison of temperature baselines. The [sensor pilot](review/milestone4_report.md) compares six deck channels with reduced layouts.
+- [KW51 deck replay dashboard](review/kw51_dashboard.md) shows the two retained channels on the bridge plan and compares both layouts on the same scheduled hours.
+- The [legacy synthetic dashboard](#legacy-demonstration) displays the original signal-stream demonstration. The [physical bench protocol](review/hardware_bench_protocol.md) describes the next experiment with paired instrument recordings.
 
 Milestone 1 provides a numerical verification foundation. It does not establish measured-data damage detection, structural safety, low-cost hardware performance, battery life or deployment suitability in Sudan. The earlier classifier and dashboard remain a labelled legacy synthetic demonstration.
 

@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KW51 deck replay</title>
+<style>/* REPLAY_CSS */</style>
+<header class="masthead">
+  <div class="identity"><span class="bridge-mark" aria-hidden="true"></span><strong>KW51 deck replay</strong></div>
+  <span>Leuven · Railway bridge</span>
+</header>
+<main>
+  <div class="intro">
+    <div>
+      <h1>Full deck vs. two channels</h1>
+      <p>Both layouts replay the original KW51 recordings. The reduced layout uses
+        <strong>aBD17Ay</strong> and <strong>aBD23Az</strong>.</p>
+    </div>
+    <a href="#sources" id="source-link">Sources and drawings ↓</a>
+  </div>
+  <div class="filters">
+    <label>Period <select id="period">
+      <option value="heldout">All held-out</option>
+      <option value="reference_test">Reference test</option>
+      <option value="retrofit">During retrofit</option>
+      <option value="post_retrofit">After retrofit</option>
+    </select></label>
+    <label>Input condition <select id="condition">
+      <option value="clean">Original recordings</option>
+      <option value="noise_5db">Simulated · Added noise</option>
+      <option value="dc_bias">Simulated · DC bias</option>
+      <option value="timing">Simulated · Relative delay</option>
+      <option value="burst">Simulated · Burst gaps</option>
+    </select></label>
+    <p id="condition-note"></p>
+  </div>
+  <div class="metrics" aria-label="Results for the selected period and condition" aria-live="polite">
+    <div><strong id="coverage"></strong><span>Scorable with both layouts</span></div>
+    <div><strong id="agreement"></strong><span>Matching change decisions</span></div>
+    <div><strong id="retained"></strong><span>Full-deck mode estimates also found by pair</span></div>
+  </div>
+  <div class="workspace">
+    <section class="panel" aria-labelledby="layout-title">
+      <div class="panel-head"><h2 id="layout-title">Deck instrumentation</h2><span>Plan view</span></div>
+      <div class="plan-scroll">
+        <div class="plan" id="deck-plan">
+          <img src="__PLAN__" alt="KW51 overview plan, with Brussels on the left, Leuven on the right, north girder C at the top and south girder A at the bottom">
+        </div>
+      </div>
+      <div class="legend"><span><i></i> Station with a retained channel</span><span><i></i> Full deck only</span></div>
+      <div class="station-detail" id="station-detail" aria-live="polite"></div>
+      <p class="caption">Markers indicate modelled channel positions. Two axes at one station share a marker.</p>
+    </section>
+    <section class="panel result" aria-labelledby="result-title">
+      <div class="panel-head"><h2 id="result-title">Paired acquisition</h2><span id="record-period"></span></div>
+      <label class="hour-label" for="hour">Scheduled hour (UTC)</label>
+      <select id="hour"></select>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th scope="col">Result</th><th scope="col">Full deck · 6</th><th scope="col">Retained pair · 2</th></tr></thead>
+          <tbody id="results" aria-live="polite"></tbody>
+        </table>
+      </div>
+      <p class="caption" id="record-note"></p>
+    </section>
+  </div>
+  <section class="panel comparison" aria-labelledby="comparison-title">
+    <div class="panel-head"><h2 id="comparison-title">Held-out acquisitions</h2><span>Select an hour to inspect it</span></div>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th scope="col">Scheduled hour (UTC)</th><th scope="col">Period</th><th scope="col">Full deck</th><th scope="col">Retained pair</th></tr></thead>
+        <tbody id="hours"></tbody>
+      </table>
+    </div>
+  </section>
+  <details class="panel sources" id="sources">
+    <summary>Sources and drawings</summary>
+    <p>The plan is cropped from the supplied <code>overview.pdf</code>. The marker registration
+      uses the bearing centres and the longitudinal positions in <code>select_sensors.m</code> and
+      <code>model_kw51.m</code>. Positions are for replay interpretation.</p>
+    <figure>
+      <img src="__GENERAL_PLAN__" loading="lazy" alt="Plan detail from the KW51-01A engineering drawing, showing the deck and rail alignments crossing the canal">
+      <figcaption>Plan detail · KW51-01A, GTN-D0-L201-03-003A</figcaption>
+    </figure>
+    <p>Change flags come from the pilot’s separately calibrated layout scores. The reference test,
+      retrofit and post-retrofit periods each retain scheduled hours where the analysis abstained.
+      A change flag indicates a frequency deviation under the pilot rule.</p>
+    <p>KW51 monitoring data by Kristof Maes and Geert Lombaert. The model package and overview
+      are credited to Kristof Maes, Menno van de Velde and Geert Lombaert, KU Leuven.
+      The general plan is from the Infrabel drawing set.
+      <a href="https://doi.org/10.5281/zenodo.3745914">Dataset</a> ·
+      <a href="https://doi.org/10.1061/(ASCE)BE.1943-5592.0001668">Data paper</a> ·
+      <a href="https://bwk.kuleuven.be/bwm/kw51">Model, drawing credits and benchmark terms</a>.
+      Dataset and model materials are under CC BY-NC-SA 4.0.</p>
+    <dl id="provenance"></dl>
+  </details>
+  <noscript>Enable JavaScript to select records and compare the two layouts.</noscript>
+</main>
+<script type="application/json" id="replay-data">__REPLAY_DATA__</script>
+<script>/* REPLAY_JS */</script>
+</html>
