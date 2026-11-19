@@ -1,0 +1,41 @@
+# Bench comparison of a low-cost accelerometer and a reference instrument
+
+## First bench session
+
+Compare one candidate MEMS accelerometer against a calibrated reference on the same signed axis. Record relative amplitude and phase, coherent frequency response at the commanded tones, low-excitation band RMS, and recording coverage. The initial 1–8 Hz band covers several frequencies in the KW51 pilot and sets the required reference bandwidth for this experiment. Select a reference with documented sensitivity, frequency response and uncertainty in the tested band. Record the calibration ID and the acquisition-chain gain and filtering before converting either capture to m/s². Keep the original logger files alongside the converted captures.
+
+1. **Mount and document.** Mount both instruments close together on a stiff fixture, align the signed axes, and document position, orientation, attachment, cable restraint and temperature. Check polarity before taking comparison data. Repeat the comparison across three independent remounts before drawing a conclusion about mounting repeatability. Keep each mounting session identifiable. Axis and mounting errors can contribute to differences between instruments. [NIST comparison study](https://www.nist.gov/publications/reduction-calibration-comparison-uncertainty-due-mounting-3-axis-accelerometers-using).
+2. **Verify timing.** Give both acquisition chains an observable common hardware trigger and time base. Record timing at acquisition, with a shared zero and a sequence number for each scheduled sample slot. Record when the timestamps refer to conversion, including documented fixed latency and digital-filter delay. Preserve timing offsets, gaps and clips. If the hardware only reports packet arrival time, or the sample timing can only be reconstructed from a nominal rate, fix or measure the acquisition timing before treating phase as evidence. Synchronisation requires a record of the physical timing setup in addition to the software checks.
+3. **Acquire paired records.** On a quiet fixture, record a quiet capture with the same acquisition settings used for the forced captures. Then make one recording per steady commanded tone and amplitude. Start near 1.9, 3 and 6.3 Hz as fixture capability permits, using known reference excitation above the predeclared minimum and below clipping. Include at least two amplitudes per tone if the bench can deliver them repeatably. At 100 samples/s, eight 2,048-sample blocks take 163.84 s and yield a 0.04883 Hz bin width. Schedule the start, stop and sample count before recording and collect during steady excitation. Repeat the quiet and forced captures for the independent remounts. Keep failed or incomplete captures with their reasons.
+4. **Compare each pair and review the sessions.** Freeze the evaluation band, search bands, minimum reference RMS and instrument settings before collecting the comparison recordings. Review coverage and clock diagnostics before interpreting the spectra. Tabulate results per tone, amplitude and mounting session, including unavailable results and the reference instrument's uncertainty. Gain depends on the entire sensor and acquisition chain. A measured discrepancy can include filter delay, fixture motion, timing error and mounting misalignment.
+
+## Input and reproduction
+
+Place the two converted CSV files and a JSON manifest in one local directory under `data/`. The comparison reads the following CSV header for each instrument.
+
+```text
+sample_index,time_s,acceleration_m_s2,quality
+```
+
+`sample_index` starts at zero for the scheduled acquisition. Omit missing slots without renumbering later rows. `time_s` is the independently observed sample time relative to the shared trigger, in seconds. Keep observed rows that were clipped or otherwise invalid and label them `clipped` or `invalid`. Use `valid` for rows with finite acceleration in m/s². Preserve the signed axis and acceleration amplitudes. Include no filled or resampled points.
+
+The manifest fields are illustrated by the synthetic example generated below. For bench records use `source_kind` of `bench_measured` with `schema_version` of `1`. Set distinct `capture_id` and `session_id` values as appropriate, the trigger time in `start_utc` with a UTC offset of zero, and record the actual `mounting` and `shared_time_reference`. Set `fs_hz`, the independently scheduled `expected_samples`, `segment_samples` and `evaluation_band_hz`. For each of `reference` and `candidate`, give the local CSV `file`, the lower-case hex `sha256`, the `instrument` identifier and its signed `axis`. Use `reference.calibration_record` and `candidate.firmware_and_configuration` to identify the corresponding local records. Use `tone: null` for quiet runs. For forced runs, specify `tone.search_band_hz` and `tone.minimum_reference_rms_m_s2`. The search band must lie inside the evaluation band and span at least three spectral bins.
+
+```powershell
+.venv/Scripts/python.exe -m src.bench_fixture outputs/bench_fixture
+.venv/Scripts/python.exe -m src.bench_validation outputs/bench_fixture/manifest.json --output outputs/bench_fixture/report.json
+```
+
+Use the same comparison command with the actual capture's manifest and a new output filename. Reports carry the input and manifest SHA-256 hashes and the source label. The CLI returns an error for invalid inputs or an existing output path. An unavailable comparison is a valid report with a reason and a successful CLI exit status.
+
+## Reading the comparison
+
+- Coverage uses the number of scheduled slots, including missing endpoints. The spectra use complete, contiguous, non-overlapping paired blocks from the scheduled interval. The report gives the count of complete blocks and any excluded partial tail. At least six complete blocks are required. The clock checks both instruments against the nominal sample grid and checks relative skew. Each maximum must be at most a quarter of the sampling period. At 100 Hz this is 2.5 ms, equivalent to 7.2° at 8 Hz for a constant offset. Report that timing contribution when interpreting phase near a target boundary. The comparison leaves the sample timing unchanged.
+- Hann-windowed Welch estimates provide band RMS for each sensor and for the paired difference. The paired difference captures all disagreement between the two systems. Quiet band RMS can include fixture and ambient motion and should be reported as such. Estimating the candidate's intrinsic noise floor would require additional isolation and a noise budget for the reference chain.
+- The tone comparison uses the reference peak within the declared search band and the candidate-to-reference transfer estimate from the cross-spectrum at that frequency. Candidate relative phase is positive for a lead. The reference must clear the minimum band RMS and have an interior peak. The initial pilot targets are peak agreement within one bin, gain within ±10%, phase within ±10°, coherence at least 0.95 and an interior candidate peak. The thresholds are screening choices for this pilot. Record observed values and uncertainty when deciding what frequency, amplitude and mounting range the measurements support. [SciPy cross-spectral convention](https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.csd.html).
+
+## Verification and remaining measurements
+
+The synthetic command recovered 3.125 Hz in both files, gain 1.04001 and candidate phase −6.0008°, compared with a constructed gain of 1.04 and phase of −6°. All eight paired blocks were available and the reported timestamp offset was 0.50 ms. The tests check timestamp misalignment, lost endpoints and clipping, weak reference excitation and altered inputs. The paired bench recordings are still needed to assess physical sensor performance and mounting repeatability.
+
+Energy and communications require their own measured captures. With the eventual acquisition settings, log supply voltage and current across idle, sensing, processing, storage and radio activity, including retries. Integrate the measured power over complete cycles and document the usable battery capacity if reporting runtime. Compare sender and receiver sequence logs before attributing missing observations to the network.
