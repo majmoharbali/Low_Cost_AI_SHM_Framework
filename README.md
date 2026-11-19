@@ -45,7 +45,7 @@ The research modules never load the saved classifier. Its legacy loader verifies
 1. Obtain and audit official Z24 recordings, or use the small KW51 tracked-modal-results archive if Z24 access remains pending.
 2. Freeze chronology, exclusions and time-group partitions before comparing constant, linear-temperature and spline-temperature reference models.
 3. Calibrate thresholds on separate reference records; evaluate held-out reference alarms, intervention responses, availability and abstentions.
-4. Study sensor reduction only with synchronous raw recordings. Processed modal results cannot establish reduced-sensor performance.
+4. Compare layout and input degradation using synchronous KW51 acceleration. The [Milestone 4 pilot](review/milestone4_report.md) records the input checks, reproduced flags, missed modes and timing effects. Physical low-cost hardware performance remains a separate experiment.
 
 Z24 requires [official registration](https://bwk.kuleuven.be/bwm/z24/registration). The [Milestone 2 audit](review/milestone2_kw51.md) documents provenance and availability for the [KW51 v1.0 archive](https://zenodo.org/records/3745914). The [Milestone 3 replay](review/milestone3_report.md) compares the three environmental baselines on chronological held-out hours and provides commands to reproduce the frozen evaluation. The pre-retrofit period may contain existing defects, and changes around the retrofit also coincide with a change in the sensing setup.
 

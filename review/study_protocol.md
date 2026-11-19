@@ -42,4 +42,6 @@ The [KW51 replay protocol](milestone3_protocol.md) fixes the chronological cut p
 
 With synchronous raw recordings and verified identification, compare engineering-selected and seeded random subsets. Select using development data and rerun identification for each subset. Processed KW51 modal series alone cannot test physical channel reduction. Inject controlled noise, bias, timing errors and burst loss into signal copies before identification. Record that original sensor noise remains present. Report unobservable modes, changes in detection and abstentions rather than promising a minimum channel count.
 
+The [KW51 raw-signal pilot](milestone4_report.md) compares 17 scenarios on prespecified deck recordings. Its measured coverage and relative timing results guide a subsequent hardware comparison, while the sparse archive replay limits generalisation.
+
 Physical low-cost sensing, mounting and synchronisation need reference-instrument comparisons. Battery/network claims need measured operation profiles and accounting for loss before the component being tested. Defer FE updating, PINNs, deep models, SHAP, automatic damage localisation and financial-risk optimisation until a measured baseline exposes a specific need. Sudan-specific deployment suitability remains untested.
