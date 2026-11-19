@@ -259,7 +259,23 @@ def _scenario_summary(scenario, clean_full, layout, flags, full_flags, records, 
     return report
 
 
-def pilot(manifest, modal_archive):
+def _acquisition_results(evaluated, flags, records):
+    return [
+        {
+            "hour_utc": record.hour,
+            "period": record.period,
+            "flag": bool(flag) if np.isfinite(flag) else None,
+            "record_reason": record.reason,
+            "modes": [
+                {"frequency_hz": mode.frequency_hz, "reason": mode.reason}
+                for mode in modes
+            ] if modes is not None else None,
+        }
+        for (modes, _), flag, record in zip(evaluated, flags, records, strict=True)
+    ]
+
+
+def pilot(manifest, modal_archive, *, include_acquisitions=False):
     rows = json.loads(manifest.read_text(encoding="utf-8"))
     if [(row["period"], row["scheduled_hour_utc"]) for row in rows] != [
         (period, hour.isoformat() + "Z") for period, hour in scheduled_hours()
@@ -290,6 +306,8 @@ def pilot(manifest, modal_archive):
             "condition": condition, "frozen_model": clean,
             "periods": _scenario_summary(evaluated, clean_full, layout, flags, full_flags, records, mode_ids),
         }
+        if include_acquisitions:
+            results[name]["acquisitions"] = _acquisition_results(evaluated, flags, records)
     return {
         "manifest_sha256": hashlib.sha256(manifest.read_bytes()).hexdigest(),
         "sample_rate_hz": SAMPLE_RATE / DECIMATION, "bin_hz": BIN,
@@ -304,8 +322,9 @@ if __name__ == "__main__":
     parser.add_argument("manifest", type=Path)
     parser.add_argument("modal_archive", type=Path)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--acquisitions", action="store_true", help="Include per-hour results for replay")
     args = parser.parse_args()
-    report = pilot(args.manifest, args.modal_archive)
+    report = pilot(args.manifest, args.modal_archive, include_acquisitions=args.acquisitions)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     with args.output.open("x", encoding="utf-8", newline="\n") as output:
         output.write(json.dumps(report, indent=2, allow_nan=False) + "\n")
