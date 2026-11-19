@@ -21,7 +21,7 @@ On Linux use `.venv/bin/python`. CI runs numerical and smoke checks on Windows a
 
 The reference is a simply supported Euler–Bernoulli beam: 20 m span, 0.30 by 0.50 m section, E = 30 GPa, density 2,500 kg/m³, and 20 consistent-mass finite elements. Its three retained mass-normalised modes have 2% damping. Inputs are nodal forces in newtons held constant between samples; outputs are acceleration in m/s². Independent sensor noise is added after the response. There is no per-window amplitude normalisation.
 
-The reduced model verifies numerical methods. It is not a calibrated model of Z24, KW51 or a field asset. It omits shear deformation, rotary inertia and response from truncated higher modes. Plain FDD estimates frequencies and relative mode shapes, not damping. Missing or ambiguous modes are unavailable. No research detector has been fitted: scores and thresholds remain absent.
+The reduced model verifies numerical methods. It is not a calibrated model of Z24, KW51 or a field asset. It omits shear deformation, rotary inertia and response from truncated higher modes. Plain FDD estimates frequencies and relative mode shapes, not damping. Missing or ambiguous modes are unavailable. This simulation path is separate from the fitted KW51 residual detectors.
 
 ## Legacy demonstration
 
@@ -47,7 +47,7 @@ The research modules never load the saved classifier. Its legacy loader verifies
 3. Calibrate thresholds on separate reference records; evaluate held-out reference alarms, intervention responses, availability and abstentions.
 4. Study sensor reduction only with synchronous raw recordings. Processed modal results cannot establish reduced-sensor performance.
 
-Z24 requires [official registration](https://bwk.kuleuven.be/bwm/z24/registration). Milestone 2 audits the [KW51 v1.0 archive](https://zenodo.org/records/3745914) of tracked modal features. The [KW51 evidence report](review/milestone2_kw51.md) gives the checksums, import command, chronology and missingness. Its reference condition may contain existing defects. A change around the retrofit can also reflect a change in the sensing setup. The environmental baseline is the next milestone.
+Z24 requires [official registration](https://bwk.kuleuven.be/bwm/z24/registration). The [Milestone 2 audit](review/milestone2_kw51.md) documents provenance and availability for the [KW51 v1.0 archive](https://zenodo.org/records/3745914). The [Milestone 3 replay](review/milestone3_report.md) compares the three environmental baselines on chronological held-out hours and provides commands to reproduce the frozen evaluation. The pre-retrofit period may contain existing defects, and changes around the retrofit also coincide with a change in the sensing setup.
 
 Local recordings, generated outputs and `graphify-out/` are ignored. The graph supplements source inspection and reports extraction-integrity warnings. The detailed protocol and milestone evidence are in `review/`.
 
