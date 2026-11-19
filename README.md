@@ -47,7 +47,7 @@ The research modules never load the saved classifier. Its legacy loader verifies
 3. Calibrate thresholds on separate reference records; evaluate held-out reference alarms, intervention responses, availability and abstentions.
 4. Study sensor reduction only with synchronous raw recordings. Processed modal results cannot establish reduced-sensor performance.
 
-Z24 requires [official registration](https://bwk.kuleuven.be/bwm/z24/registration); its recordings must not be redistributed. [KW51](https://bwk.kuleuven.be/bwm/kw51) has an [official archive](https://zenodo.org/records/3745914). Its reference condition may contain existing defects; retrofit-associated change is not a known damage-onset label. Neither dataset has been analysed by this milestone.
+Z24 requires [official registration](https://bwk.kuleuven.be/bwm/z24/registration). Milestone 2 audits the [KW51 v1.0 archive](https://zenodo.org/records/3745914) of tracked modal features. The [KW51 evidence report](review/milestone2_kw51.md) gives the checksums, import command, chronology and missingness. Its reference condition may contain existing defects. A change around the retrofit can also reflect a change in the sensing setup. The environmental baseline is the next milestone.
 
 Local recordings, generated outputs and `graphify-out/` are ignored. The graph supplements source inspection and reports extraction-integrity warnings. The detailed protocol and milestone evidence are in `review/`.
 
