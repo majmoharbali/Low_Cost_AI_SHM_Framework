@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Low-Cost AI-Driven SHM Dashboard | Infrastructure Resilience for Developing Nations</title>
+    <title>Legacy synthetic SHM demonstration</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -321,11 +321,10 @@
             <div>
                 <h1
                     style="margin:0; font-size:2.4rem; font-weight:900; background: linear-gradient(90deg, var(--primary), #7c3aed); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -0.02em;">
-                    LOW-COST AI-DRIVEN SHM DASHBOARD
+                    LEGACY SYNTHETIC SHM DEMONSTRATION
                 </h1>
                 <div style="font-size:1rem; color:var(--text-sub); margin-top: 4px; font-weight: 500;">
-                    Democratizing Infrastructure Resilience • Sustainable Monitoring for Developing Nations • Sudan
-                    Focus
+                    Synthetic signals only. No structural safety, measured-data or hardware assessment.
                 </div>
             </div>
 
@@ -354,7 +353,7 @@
         </div>
 
         <div class="card col-8">
-            <h2>Live Structure Status</h2>
+            <h2>Illustrative geometry; not a calibrated asset model</h2>
             <div class="bridge-container" style="overflow: hidden;">
                 <svg width="100%" height="100%" viewBox="0 0 600 150" fill="none" xmlns="http://www.w3.org/2000/svg"
                     style="position:absolute; bottom: 0;">
@@ -391,56 +390,56 @@
                     </g>
                 </svg>
 
-                <div id="sensor-0" class="sensor-node" style="left: 25%; top: 80%;">
+                <div id="sensor-0" class="sensor-node" style="left: 10%; top: 80%;">
                     <div class="sensor-label" style="margin-top: -35px;">S0</div>
                 </div>
                 <div id="sensor-1" class="sensor-node" style="left: 50%; top: 80%;">
                     <div class="sensor-label" style="margin-top: -35px;">S1</div>
                 </div>
-                <div id="sensor-2" class="sensor-node" style="left: 75%; top: 80%;">
+                <div id="sensor-2" class="sensor-node" style="left: 90%; top: 80%;">
                     <div class="sensor-label" style="margin-top: -35px;">S2</div>
                 </div>
             </div>
         </div>
 
         <div class="card col-4">
-            <h2>Bayesian Health Assessment</h2>
-            <div id="health-status-text" class="value-huge" style="color:var(--success)">Healthy</div>
-            <div class="value-sub" style="margin-bottom:20px;">Fused Confidence Interval</div>
+            <h2>Global assessment unavailable</h2>
+            <div id="health-status-text" class="value-huge" style="color:var(--text-sub)">No observation</div>
+            <div class="value-sub" style="margin-bottom:20px;">Legacy channel-0 output only; no global probabilities</div>
 
             <div class="prob-row">
                 <div class="prob-label">HEALTHY</div>
                 <div class="prob-track">
                     <div id="bar-h" class="prob-fill" style="width:0%; background:var(--success)"></div>
                 </div>
-                <div id="val-h" class="prob-val">0%</div>
+                <div id="val-h" class="prob-val">Unavailable</div>
             </div>
             <div class="prob-row">
                 <div class="prob-label">INCIPIENT</div>
                 <div class="prob-track">
                     <div id="bar-i" class="prob-fill" style="width:0%; background:var(--warning)"></div>
                 </div>
-                <div id="val-i" class="prob-val">0%</div>
+                <div id="val-i" class="prob-val">Unavailable</div>
             </div>
             <div class="prob-row">
                 <div class="prob-label">SEVERE</div>
                 <div class="prob-track">
                     <div id="bar-s" class="prob-fill" style="width:0%; background:var(--danger)"></div>
                 </div>
-                <div id="val-s" class="prob-val">0%</div>
+                <div id="val-s" class="prob-val">Unavailable</div>
             </div>
 
             <div
                 style="margin-top:20px; padding-top:15px; border-top:1px solid var(--border); font-size:0.8rem; color:var(--text-sub); display:flex; justify-content:space-between;">
-                <span>System Entropy (Uncertainty)</span>
-                <strong id="entropy-val" style="color:var(--text-sub)">0.000</strong>
+                <span>Global uncertainty unavailable</span>
+                <strong id="entropy-val" style="color:var(--text-sub)">Unavailable</strong>
             </div>
         </div>
 
         <div class="card col-12 xai-container">
-            <h2 style="color:var(--primary)">⚡ AI Physical Interpretation</h2>
+            <h2 style="color:var(--primary)">⚡ Legacy synthetic output</h2>
             <div id="xai-text" style="font-size:1.1rem; line-height:1.6; color:var(--text-main); font-weight:300;">
-                Waiting for physics engine analysis...
+                No observation. This display does not assess structural condition.
             </div>
         </div>
 
@@ -455,22 +454,22 @@
         </div>
 
         <div class="card col-3">
-            <h2>Battery</h2>
+            <h2>Battery (not evaluated)</h2>
             <div id="batt-val" class="value-huge">--%</div>
             <div id="solar-val" class="value-sub">-- W Charging</div>
         </div>
         <div class="card col-3">
-            <h2>Network Health</h2>
+            <h2>Network (not evaluated)</h2>
             <div id="net-val" class="value-huge">--%</div>
             <div class="value-sub">Packet Success Rate</div>
         </div>
         <div class="card col-3">
-            <h2>Data Cap</h2>
+            <h2>Data usage (not evaluated)</h2>
             <div id="data-val" class="value-huge">-- MB</div>
             <div class="value-sub">Daily Usage</div>
         </div>
         <div class="card col-3" style="height:250px">
-            <h2>🔍 SHAP Feature Impact</h2>
+            <h2>🔍 SHAP disabled: surrogate is not the deployed model</h2>
             <div style="height:180px; padding: 10px 0;"><canvas id="shapChart"></canvas></div>
         </div>
     </div>
@@ -528,9 +527,9 @@
         const chartConf = {
             type: 'line',
             data: {
-                labels: Array.from({ length: 100 }, (_, i) => (i * 10) + 'ms'),
+                labels: Array.from({ length: 100 }, (_, i) => (i * 100) + 'ms'),
                 datasets: [{
-                    label: 'Acceleration (g)',
+                    label: 'Legacy signal (arbitrary units)',
                     data: [],
                     borderColor: '#38bdf8',
                     borderWidth: 2,
@@ -556,7 +555,7 @@
                     },
                     tooltip: {
                         mode: 'index', intersect: false,
-                        callbacks: { label: (ctx) => ` ${ctx.raw.toFixed(4)} g` }
+                        callbacks: { label: (ctx) => ` ${ctx.raw.toFixed(4)} arbitrary units` }
                     }
                 },
                 scales: {
@@ -570,7 +569,7 @@
                         display: true, min: -1.5, max: 1.5,
                         grid: { color: '#334155' },
                         ticks: { color: '#94a3b8' },
-                        title: { display: true, text: 'Amplitude (g)', color: '#94a3b8', font: { size: 10 } }
+                        title: { display: true, text: 'Legacy amplitude (arbitrary units)', color: '#94a3b8', font: { size: 10 } }
                     }
                 }
             }
@@ -648,13 +647,15 @@
 
             ws.onopen = () => {
                 badge.classList.add('conn-active');
-                statusText.textContent = "Live Stream Active";
+                statusText.textContent = "Legacy synthetic stream";
                 statusText.style.color = "var(--success)";
             };
 
             ws.onclose = () => {
                 badge.classList.remove('conn-active');
                 statusText.textContent = "Reconnecting...";
+                document.getElementById("health-status-text").textContent = "No current observation";
+                document.getElementById("xai-text").textContent = "Stream disconnected; previous readings are stale.";
                 statusText.style.color = "var(--danger)";
                 setTimeout(connect, 2000);
             };
@@ -668,13 +669,17 @@
                 const states = data.sensor_fusion.sensor_states;
                 for (let i = 0; i < 3; i++) {
                     const node = document.getElementById(`sensor-${i}`);
-                    if (node) node.className = `sensor-node status-${states[i].class}`;
+                    if (node) node.className = states[i]?.class == null ? "sensor-node" : `sensor-node status-${states[i].class}`;
                 }
             }
 
             // Health Bars
             if (data.sensor_fusion) {
                 const probs = data.sensor_fusion.aggregated_confidence;
+                if (!Array.isArray(probs)) {
+                    document.getElementById('health-status-text').textContent = 'Not assessed';
+                    document.getElementById('health-status-text').style.color = 'var(--text-sub)';
+                } else {
                 const decisions = ['Healthy', 'Incipient Damage', 'Severe Damage'];
                 const colors = ['var(--success)', 'var(--warning)', 'var(--danger)'];
 
@@ -694,7 +699,8 @@
                 });
 
                 const ent = document.getElementById('entropy-val');
-                if (ent) ent.textContent = data.sensor_fusion.uncertainty_entropy.toFixed(4);
+                if (ent) ent.textContent = data.sensor_fusion.uncertainty_entropy == null ? 'Unavailable' : data.sensor_fusion.uncertainty_entropy.toFixed(4);
+                }
             }
 
             // XAI Text

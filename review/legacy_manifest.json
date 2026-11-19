@@ -1,0 +1,14 @@
+{
+  "reviewed_revision": "39ca47f6b7627c326f26d953307c3af16a2ef962",
+  "scope": "Original synthetic demonstration; not measured-data or hardware validation.",
+  "sha256": {
+    "src/main_simulation.py": "4409bc3957cbe133cd859db23666cdb8d1f24b61aada5a6e0625bdf6d832fce3",
+    "src/train_model.py": "6e86dbbfd33490b188317d74f53473d399ca03dee59c867900735ee6f9bdc0ca",
+    "src/core/physics_engine.py": "2f2ca22e3de570b63d5304c427602af11d143b57ac48429cfac72e504c66732e",
+    "src/core/sensor_fusion.py": "0889947b95fed10ed8aa01f8683539f0ac5222e47c221d3c9569fe16f7f0fe2b",
+    "src/core/xai_engine.py": "d9d2f4108584f3b4a23f6f3572b89ca72290120d997e22f59f3d87b52d528a83",
+    "src/utils/power_manager.py": "a3ff4d6998f3a7fa5fac1eb1dafb428f6f8d8badec201a28876ff63432a4b5f9",
+    "src/utils/network_manager.py": "ca7fa313b6568f3230cf348da6399f39316ed6612ba1d4ecdfd1fd9c401bde94",
+    "artifacts/shm_deployment_package_enhanced.pkl": "e7bd995ab8edc69656b8bf221da0de5c85b120476be112189368dbefd2801745"
+  }
+}

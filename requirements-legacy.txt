@@ -1,0 +1,4 @@
+-r requirements.txt
+scikit-learn==1.7.1
+websockets==15.0.1
+
