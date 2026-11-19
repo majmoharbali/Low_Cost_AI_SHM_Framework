@@ -1,12 +1,20 @@
-# Low-cost SHM: research baseline and legacy demonstration
+# Low-cost structural health monitoring · KW51 replay
 
-This project studies how environmental effects can be separated from structural changes in measured vibration data and how reducing or degrading the measurements affects the result.
+Could two well-placed acceleration channels give the same change decisions as six? This demonstration replays measured vibrations from the KW51 railway bridge in Leuven. It compares the same recording twice, first with all six deck channels and then with two retained channels.
 
-- [KW51 results and reproduction](review/milestone3_report.md) covers the held-out comparison of temperature baselines. The [sensor pilot](review/milestone4_report.md) compares six deck channels with reduced layouts.
-- [KW51 deck replay dashboard](review/kw51_dashboard.md) shows the two retained channels on the bridge plan and compares both layouts on the same scheduled hours.
-- The [legacy synthetic dashboard](#legacy-demonstration) displays the original signal-stream demonstration. The [physical bench protocol](review/hardware_bench_protocol.md) describes the next experiment with paired instrument recordings.
+![KW51 replay dashboard showing the retained channels on the bridge plan and a side-by-side comparison of one recording](review/figures/kw51-dashboard.jpg)
 
-Milestone 1 provides a numerical verification foundation. It does not establish measured-data damage detection, structural safety, low-cost hardware performance, battery life or deployment suitability in Sudan. The earlier classifier and dashboard remain a labelled legacy synthetic demonstration.
+## Read the demonstration
+
+1. **Find the retained channels.** Select **A · 17** for `aBD17Ay` (lateral acceleration) or **A · 23** for `aBD23Az` (vertical acceleration). A channel measures motion at one location in one direction. Both channels come from the bridge's original instruments.
+2. **Compare the same hour.** The table shows estimated natural frequencies and the change decision for each layout. A **Change flag** means the frequency score crossed its reference threshold. **No flag** means it stayed within the threshold. **Unavailable** means the data or modal estimates were insufficient.
+3. **Try simulated degradation.** Switch **Input condition** from original recordings to added noise, bias, timing skew or burst gaps. The burst-gap case reduced the number of jointly scorable hours from 18 to 13.
+
+With the original recordings, both layouts produced decisions for **18 of 22** held-out hours and agreed on all **18**. The pair also recovered **78 of 79** modal estimates found by the six-channel layout. These are agreement and coverage results for this pilot. Field performance of low-cost MEMS sensors remains to be measured.
+
+[Build and open the dashboard](review/kw51_dashboard.md) · [Read the sensor pilot](review/milestone4_report.md) · [Read the temperature comparison](review/milestone3_report.md)
+
+Screenshot uses KW51 monitoring data by Kristof Maes and Geert Lombaert and the KU Leuven model overview by Kristof Maes, Menno van de Velde and Geert Lombaert. The overview is cropped and annotated with station markers. The screenshot is shared under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/). [KU Leuven benchmark and credits](https://bwk.kuleuven.be/bwm/kw51)
 
 ## Installation
 
@@ -25,7 +33,7 @@ On Linux use `.venv/bin/python`. CI runs numerical and smoke checks on Windows a
 
 The reference is a simply supported Euler–Bernoulli beam: 20 m span, 0.30 by 0.50 m section, E = 30 GPa, density 2,500 kg/m³, and 20 consistent-mass finite elements. Its three retained mass-normalised modes have 2% damping. Inputs are nodal forces in newtons held constant between samples; outputs are acceleration in m/s². Independent sensor noise is added after the response. There is no per-window amplitude normalisation.
 
-The reduced model verifies numerical methods. It is not a calibrated model of Z24, KW51 or a field asset. It omits shear deformation, rotary inertia and response from truncated higher modes. Plain FDD estimates frequencies and relative mode shapes, not damping. Missing or ambiguous modes are unavailable. This simulation path is separate from the fitted KW51 residual detectors.
+The reduced model verifies numerical methods and omits shear deformation, rotary inertia and response from truncated higher modes. The KW51 replay uses Frequency Domain Decomposition (FDD) to estimate frequencies and relative mode shapes. Missing or ambiguous modes are marked unavailable.
 
 ## Legacy demonstration
 
@@ -44,16 +52,8 @@ Open `dashboard/index.html` for the finite legacy stream. Only sensor 0 is class
 
 The research modules never load the saved classifier. Its legacy loader verifies the original checksum and rejects non-legacy source identifiers before loading or prediction.
 
-## Measured-data milestones
+## Further experiments
 
-1. Obtain and audit official Z24 recordings, or use the small KW51 tracked-modal-results archive if Z24 access remains pending.
-2. Freeze chronology, exclusions and time-group partitions before comparing constant, linear-temperature and spline-temperature reference models.
-3. Calibrate thresholds on separate reference records; evaluate held-out reference alarms, intervention responses, availability and abstentions.
-4. Compare layout and input degradation using synchronous KW51 acceleration. The [Milestone 4 pilot](review/milestone4_report.md) records the input checks, reproduced flags, missed modes and timing effects.
-5. Compare a co-mounted low-cost accelerometer and calibrated reference. The [bench protocol](review/hardware_bench_protocol.md) defines the recording procedure and provides a tested comparison command. The physical comparison awaits paired captures.
-
-Z24 requires [official registration](https://bwk.kuleuven.be/bwm/z24/registration). The [Milestone 2 audit](review/milestone2_kw51.md) documents provenance and availability for the [KW51 v1.0 archive](https://zenodo.org/records/3745914). The [Milestone 3 replay](review/milestone3_report.md) compares the three environmental baselines on chronological held-out hours and provides commands to reproduce the frozen evaluation. The pre-retrofit period may contain existing defects, and changes around the retrofit also coincide with a change in the sensing setup.
-
-Local recordings, generated outputs and `graphify-out/` are ignored. The graph supplements source inspection and reports extraction-integrity warnings. The detailed protocol and milestone evidence are in `review/`.
+The [KW51 data audit](review/milestone2_kw51.md) documents the monitoring periods and sensing setup. The [bench protocol](review/hardware_bench_protocol.md) describes how to compare a low-cost accelerometer against a calibrated reference.
 
 Author: Majzoob Ali.
